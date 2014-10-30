@@ -14,13 +14,12 @@ import org.imgscalr.Scalr;
 
 import javax.imageio.ImageIO;
 
+
 public class ADPDFCreator {
 
 
-	public enum Font { HELVECTICA } 
 
-
-  public static ByteArrayOutputStream createPDF(InputStream inputFront,InputStream inputBack,Font fontID,Vector<String> textList) throws IOException, COSVisitorException {
+  public static ByteArrayOutputStream createPDF(InputStream inputFront,InputStream inputBack,ADFont fontID,Vector<String> textList) throws IOException, COSVisitorException {
 
 	 PDDocument document;
 	 PDPage page;

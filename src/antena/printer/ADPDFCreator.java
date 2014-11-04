@@ -63,42 +63,21 @@ public class ADPDFCreator {
        	 // Next we start a new content stream which will "hold" the to be created content.
        	 contentStream = new PDPageContentStream(document, page);                
 
-       	 // Let's define the content stream
-       	 contentStream.beginText();
-       	 contentStream.setFont(font, 8);
-       	 contentStream.moveTextPositionByAmount(10, 770);
-       	 contentStream.drawString("Amount: $1.00");
-       	 contentStream.endText();
 
-       	 contentStream.beginText();
-       	 contentStream.setFont(font, 8);
-       	 contentStream.moveTextPositionByAmount(200, 770);
-       	 contentStream.drawString("Sequence Number: 123456789");
-       	 contentStream.endText();
+	 int xSTART = 10;
+	 int ySTART = 770;
+	 int X_DELTA = 0;
+	 int Y_DELTA = 20;
 
-       	 contentStream.beginText();
-       	 contentStream.setFont(font, 8);
-       	 contentStream.moveTextPositionByAmount(10, 760);
-       	 contentStream.drawString("Account: 123456789");
-       	 contentStream.endText();
+	 for (int i=0;i < textList.size();i++) {
 
-       	 contentStream.beginText();
-       	 contentStream.setFont(font, 8);
-       	 contentStream.moveTextPositionByAmount(200, 760);
-       	 contentStream.drawString("Captura Date: 04/25/2011");
-       	 contentStream.endText();
-
-       	 contentStream.beginText();
-       	 contentStream.setFont(font, 8);
-       	 contentStream.moveTextPositionByAmount(10, 750);
-       	 contentStream.drawString("Bank Number: 123456789");
-       	 contentStream.endText();
-
-       	 contentStream.beginText();
-       	 contentStream.setFont(font, 8);
-       	 contentStream.moveTextPositionByAmount(200, 750);
-       	 contentStream.drawString("Check Number: 123456789");
-       	 contentStream.endText();            
+       	 	// Let's define the content stream
+       	 	contentStream.beginText();
+       	 	contentStream.setFont(font, 8);
+       	 	contentStream.moveTextPositionByAmount(xSTART + i*X_DELTA,ySTART - i*Y_DELTA);
+       	 	contentStream.drawString(textList.elementAt(i));
+       	 	contentStream.endText();
+	 }
 
        	 // Let's close the content stream       
        	 contentStream.close();

@@ -19,19 +19,18 @@ public class ADPDFCreator {
 
 
 
-  public static ByteArrayOutputStream createPDF(InputStream inputFront,InputStream inputBack,ADFont fontID,Vector<String> textList) throws IOException, COSVisitorException {
+  public static ByteArrayOutputStream createPDF(InputStream header,ADFont fontID,Vector<String> textList) throws IOException, COSVisitorException {
 
 	 PDDocument document;
 	 PDPage page;
 	 PDFont font;
 	 PDPageContentStream contentStream;
 	 PDJpeg front;
-	 PDJpeg back;
 
 	 BufferedImage buffFront;
 	 BufferedImage resizedFront;
-       	 BufferedImage buffBack;
-       	 BufferedImage resizedBack;
+
+
 	 ByteArrayOutputStream output = new ByteArrayOutputStream(); 
 
  	 // Creating Document
@@ -42,30 +41,23 @@ public class ADPDFCreator {
        	 // Adding page to document
        	 document.addPage(page); 
 
-       	 // Adding FONT to document TODO use the Font enum...
-       	 font = PDType1Font.HELVETICA;           
-	
-	 if (inputFront != null) { 
-
-		buffFront = ImageIO.read(inputFront);
-       	 	resizedFront = Scalr.resize(buffFront, 460);
-       	 	front = new PDJpeg(document, resizedFront);
-	 }
-
-	 if (inputBack != null) {
-
-       	 	buffBack = ImageIO.read(inputBack);
-       	 	resizedBack = Scalr.resize(buffBack, 460); 
-       	 	back = new PDJpeg(document, resizedBack);
-	 }
-
-
        	 // Next we start a new content stream which will "hold" the to be created content.
        	 contentStream = new PDPageContentStream(document, page);                
 
+       	 // Adding FONT to document TODO use the Font enum...
+       	 font = PDType1Font.HELVETICA;           
+	
+	 if (header != null) { 
+
+		buffFront = ImageIO.read(header);
+       	 	//resizedFront = Scalr.resize(buffFront, 460);
+       	 	//front = new PDJpeg(document, resizedFront);
+       	 	front = new PDJpeg(document, buffFront);
+	 	contentStream.drawImage(front, 10, 700);
+	 }
 
 	 int xSTART = 10;
-	 int ySTART = 770;
+	 int ySTART = 570;
 	 int X_DELTA = 0;
 	 int Y_DELTA = 20;
 
